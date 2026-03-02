@@ -71,7 +71,6 @@ public class Partido {
             Arbitro arbitro = asignarArbitro();
             arbitro.saludar();
             System.out.println(Colores.NEGRITA+Colores.MORADO_BRILLANTE+"----------------------" + Colores.RESET);
-            //sleep();
             if(numGoles!=0) {
                 for (int i = 0; i < numGoles; i++) {
                     int equipo = rand.nextInt(1, 3);
@@ -83,7 +82,10 @@ public class Partido {
                                 golesLocal++;
                                 this.equipoLocal.marcarGoles(1);
                                 this.equipoVisitante.recibirGoles();
-                                this.equipoVisitante.hacerFalta();
+                                int numero = rand.nextInt(1,5);
+                                if(numero==4) {
+                                    this.equipoVisitante.hacerFalta();
+                                }
                             } else {
                                 System.out.println(Colores.NEGRITA + Colores.VERDE + this.equipoVisitante.getPortero() + " ha hecho una parada." + Colores.RESET);
                             }
@@ -92,7 +94,10 @@ public class Partido {
                             golesLocal++;
                             this.equipoLocal.marcarGoles(1);
                             this.equipoVisitante.recibirGoles();
-                            this.equipoVisitante.hacerFalta();
+                            int numero = rand.nextInt(1,5);
+                            if(numero==4) {
+                                this.equipoVisitante.hacerFalta();
+                            }
                         }
                     }
                     else {
@@ -101,7 +106,10 @@ public class Partido {
                                 golesVisitante++;
                                 this.equipoVisitante.marcarGoles(1);
                                 this.equipoLocal.recibirGoles();
-                                this.equipoLocal.hacerFalta();
+                                int numero = rand.nextInt(1,5);
+                                if(numero==4) {
+                                    this.equipoLocal.hacerFalta();
+                                }
                             } else {
                                 System.out.println(Colores.NEGRITA + Colores.VERDE + this.equipoVisitante.getPortero() + " ha hecho una parada." + Colores.RESET);
                             }
@@ -110,7 +118,10 @@ public class Partido {
                             golesVisitante++;
                             this.equipoVisitante.marcarGoles(1);
                             this.equipoLocal.recibirGoles();
-                            this.equipoLocal.hacerFalta();
+                            int numero = rand.nextInt(1,5);
+                            if(numero==4) {
+                                this.equipoLocal.hacerFalta();
+                            }
                         }
                     }
                     //sleep();

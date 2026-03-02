@@ -69,12 +69,12 @@ public class Jugador extends Persona{
 
     public void tarjetaAmarilla(){
         this.amarilla++;
-        System.out.println(Colores.NEGRITA+Colores.AMARILLO_BRILLANTE +  this.getNombre()+" ha hecho una falta dura y el arbitro le ha sacado una tarjeta amarilla."+Colores.RESET);
+        System.out.println(Colores.NEGRITA+Colores.AMARILLO_BRILLANTE +  this.getNombre()+" ha hecho una falta, recibe una tarjeta amarilla"+Colores.RESET);
     }
 
     public void tarjetaRoja(){
         this.roja++;
-        System.out.println(Colores.NEGRITA+Colores.ROJO_BRILLANTE + this.getNombre() + " ha hecho otra falta dura y se gana la segunda amarilla asi que el arbitro le saca tarjeta roja."+Colores.RESET);
+        System.out.println(Colores.NEGRITA+Colores.ROJO_BRILLANTE + this.getNombre() + " ha hecho otra falta falta, se gana la segunda amarilla asi que el arbitro le saca tarjeta roja."+Colores.RESET);
     }
 
     public void getInfo(){

@@ -95,7 +95,6 @@ public class Torneo extends Player {
             for (int i = 0; i < partidosPorJornada; i++) {
                 Partido partido = partidos.get(indice);
                 partido.jugarPartido();
-                System.out.println(partido);
                 indice++;
             }
 

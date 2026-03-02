@@ -25,12 +25,9 @@ public class Equipo {
     private int falta;
 
     public Equipo(){}
+
     public Equipo(String nombre){
         this.nombre = nombre;
-    }
-    public Equipo(String nombre, Estadio estadio) {
-        this.nombre = nombre;
-        this.estadio = estadio;
     }
 
     public Equipo(String nombre, Estadio estadio, Entrenador entrenador) {
@@ -115,6 +112,7 @@ public class Equipo {
     public void marcarGoles(int goles){
         Random rand = new Random();
         List<Jugador> jugadoresDeCampo = new ArrayList<>();
+
         for (Jugador jugador : jugadores) {
             if (!jugador.getPosicion().toString().equals("PORTERO")) {
                 jugadoresDeCampo.add(jugador);

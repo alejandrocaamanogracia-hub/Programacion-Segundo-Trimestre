@@ -1,6 +1,6 @@
 package Clases.personas;
 
-public class Entrenador extends Persona{
+public final class Entrenador extends Persona{
 
     public Entrenador(){}
 
@@ -8,4 +8,8 @@ public class Entrenador extends Persona{
         super(nombre, edad, personalidad);
     }
 
+    @Override
+    public String toString() {
+        return "";
+    }
 }
