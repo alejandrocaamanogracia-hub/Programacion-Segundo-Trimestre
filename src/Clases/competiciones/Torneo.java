@@ -119,6 +119,8 @@ public class Torneo {
             System.out.println("Pulsa 1 ->");
             System.out.println("Simular el resto de las jornadas");
             System.out.println("Pulsa 2 ->");
+            System.out.println("Ver clasificación");
+            System.out.println("Pulsa 3 ->");
 
             while (true) {
                 String opcion = sc.nextLine();
@@ -144,6 +146,10 @@ public class Torneo {
                             pos++;
                         }
                         System.out.println();
+                        System.out.println("JUGAR SIGUIENTE JORNADA");
+                        System.out.println("Pulsa 1 ->");
+                        System.out.println("Simular el resto de las jornadas");
+                        System.out.println("Pulsa 2 ->");
                     }
                     else if (opcion.equals("1")) {
                         break;
