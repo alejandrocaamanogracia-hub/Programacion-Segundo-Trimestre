@@ -114,7 +114,7 @@ public class Equipo {
         List<Jugador> jugadoresDeCampo = new ArrayList<>();
 
         for (Jugador jugador : jugadores) {
-            if (!jugador.getPosicion().equals("PORTERO")) {
+            if (!jugador.getPosicion().toString().equals("PORTERO")) {
                 jugadoresDeCampo.add(jugador);
             }
         }
