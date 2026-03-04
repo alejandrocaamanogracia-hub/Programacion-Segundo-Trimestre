@@ -1,12 +1,10 @@
 package Clases;
 
 import Clases.competiciones.Torneo;
-import Clases.creacionObjetos.CreacionEquipos;
 import Clases.creacionObjetos.CreacionPersonas;
 import Clases.equipos.Equipo;
 import Clases.personas.Jugador;
 
-import javax.swing.plaf.synth.ColorType;
 import java.util.*;
 
 public class Menu {
@@ -80,30 +78,17 @@ public class Menu {
                         }
                     }
                 }
-
                 System.out.println();
-
-                while(true) {
-                    System.out.println("1. IR A TIENDA (compra rápida)");
-                    System.out.println("2. MERCADO DE FICHAJES (cambiar plantilla - fin de temporada)");
-                    String opcion1 = sc.nextLine();
-                    if (opcion1.equals("1")) {
-                        for(Equipo equipo : torneo.getEquipos()){
-                            tienda.addJugadores(equipo.getJugadores());
-                        }
-                        tienda.comprarJugador(player);
-                        break;
-                    } else if (opcion1.equals("2")) {
-                        tienda.cambiarPlantilla(player, torneo.getEquipos());
-                        break;
-                    }
-                }
 
                 // Reiniciar puntos para la siguiente temporada
                 for (Equipo equipo : torneo.getEquipos()) {
                     equipo.setPuntos(0);
                     equipo.setGolesFavor(0);
                     equipo.setGolesContra(0);
+
+                    for(Jugador jugador : equipo.getJugadores()){
+                        jugador.setFaltas(0);
+                    }
                 }
                 temporada++;
             }
@@ -116,17 +101,21 @@ public class Menu {
                 List<Equipo> provisional = new ArrayList<Equipo>();
                 provisional.addAll(torneo.getEquipos());
 
-                provisional.sort((e1, e2) -> Integer.compare(e2.getPuntos(), e1.getPuntos()));
+                for (int i = 0; i < provisional.size() - 1; i++) {
+                    for (int j = 0; j < provisional.size() - 1 - i; j++) {
+                        if (provisional.get(j).getPuntos() < provisional.get(j + 1).getPuntos()) {
+                            Equipo temporal = provisional.get(j);
+                            provisional.set(j, provisional.get(j + 1));
+                            provisional.set(j + 1, temporal);
+                        }
+                    }
+                }
 
                 int i = 1;
                 for(Equipo equipo : provisional){
                     System.out.println(i+". "+equipo.getNombre()+": "+equipo.getPuntos()+"ptos");
                     i++;
                 }
-
-            }
-            else{
-                continue;
             }
         }
     }

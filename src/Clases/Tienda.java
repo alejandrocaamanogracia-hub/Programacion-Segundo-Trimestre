@@ -323,12 +323,7 @@ public class Tienda {
                     centrocampista++;
 
                 }
-
             }
-
-
         }
-
     }
-
 }

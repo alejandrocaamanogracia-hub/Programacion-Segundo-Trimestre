@@ -11,8 +11,10 @@ public class Jugador extends Persona{
     private int golesAnotados;
     private int precio;
     private Equipo equipo;
+    private int faltas;
     private int amarilla;
     private int roja;
+    private boolean ultimaFalta;
 
     public Jugador(String nombre, int edad, String personalidad ,Posiciones posicion, int precio,  Equipo equipo) {
         super(nombre, edad, personalidad);
@@ -62,6 +64,23 @@ public class Jugador extends Persona{
 
     public void setRoja(int roja) { this.roja = roja; }
 
+    public int getFaltas() {
+        return faltas;
+    }
+
+    public void setFaltas(int faltas) {
+        this.faltas = faltas;
+    }
+
+    public boolean isUltimaFalta() {
+        return ultimaFalta;
+    }
+
+    public void setUltimaFalta(boolean ultimaFalta) {
+        this.ultimaFalta = ultimaFalta;
+    }
+
+
     public void anotarGol(){
         this.golesAnotados++;
         System.out.println(Colores.NEGRITA+Colores.CIAN_BRILLANTE +this.getNombre()+" ha marcado un gol" + Colores.RESET);
@@ -74,22 +93,20 @@ public class Jugador extends Persona{
 
     public void tarjetaRoja(){
         this.roja++;
-        System.out.println(Colores.NEGRITA+Colores.ROJO_BRILLANTE + this.getNombre() + " ha hecho otra falta falta, se gana la segunda amarilla asi que el arbitro le saca tarjeta roja."+Colores.RESET);
-    }
-
-    public void getInfo(){
-        System.out.println("--------------------");
-        System.out.println(this.getNombre());
-        System.out.println(this.getEdad()+" años");
-        System.out.println("Posición: "+this.getPosicion());
-        System.out.println(this.getGolesAnotados()+" goles");
+        this.ultimaFalta=true;
+        System.out.println(Colores.NEGRITA+Colores.ROJO_BRILLANTE + this.getNombre() + " ha hecho otra falta, se gana la tarjeta roja."+Colores.RESET);
     }
 
     @Override
     public String toString() {
-        return  super.toString() +
-                ",  Posicion= " + posicion +
-                ",  GolesAnotados= " + golesAnotados +
-                ",  Precio= " + precio+"€";
+        return "Jugador{" +
+                "equipo=" + equipo +
+                ", posicion=" + posicion +
+                ", golesAnotados=" + golesAnotados +
+                ", precio=" + precio +
+                ", faltas=" + faltas +
+                ", amarilla=" + amarilla +
+                ", roja=" + roja +
+                "} " + super.toString();
     }
 }

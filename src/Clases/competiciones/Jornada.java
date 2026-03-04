@@ -12,8 +12,6 @@ public class Jornada {
     private int numeroJornada;
     LocalDate fechaJornada;
 
-    public Jornada() {}
-
     public Jornada(LocalDate fechaJornada, int numeroJornada, List<Partido> partidos) {
         this.fechaJornada = fechaJornada;
         this.numeroJornada = numeroJornada;

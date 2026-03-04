@@ -6,6 +6,7 @@ import Clases.personas.Arbitro;
 import Clases.personas.Entrenador;
 import Clases.personas.Jugador;
 import Clases.Tienda;
+import Clases.personas.Persona;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -15,11 +16,11 @@ import java.util.List;
 
 public class CreacionPersonas {
 
-    protected static List<Entrenador> entrenadores = new ArrayList<Entrenador>();
+    protected static List<Persona> entrenadores = new ArrayList<Persona>();
     public static List<Jugador>  jugadores = new ArrayList<Jugador>();
-    public static List<Arbitro> arbitros = new ArrayList<>();
+    public static List<Persona> arbitros = new ArrayList<Persona>();
 
-    public static List<Entrenador> getEntrenadores() {
+    public static List<Persona> getEntrenadores() {
         return entrenadores;
     }
 
@@ -45,9 +46,9 @@ public class CreacionPersonas {
                 int edad =  Integer.parseInt(informacion[1]);
                 String personalidad = informacion[2];
 
+                Persona entrenador = new Entrenador(nombre,edad,personalidad);
 
-                entrenadores.add(new Entrenador(nombre, edad, personalidad));
-
+                entrenadores.add(entrenador);
             }
 
         } catch (Exception e) {
@@ -115,18 +116,20 @@ public class CreacionPersonas {
 
                 String[] informacion = linea.split(",");
 
+
                 String nombre = informacion[0];
                 int edad =  Integer.parseInt(informacion[1]);
                 String personalidad = informacion[2];
 
-                arbitros.add( new Arbitro(nombre, edad, personalidad));
+                Persona arbitro = new Arbitro(nombre, edad, personalidad);
+
+                arbitros.add( arbitro);
 
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
 }

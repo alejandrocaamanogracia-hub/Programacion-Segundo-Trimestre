@@ -9,18 +9,15 @@ import java.util.List;
 public class Player {
     private int dinero=10000;
 
-    //! EL PLAYER DEBE COMENCAR CON JUGADORES EN EL EQUIPO
     private Equipo equipoPlayer;
 
     public Player() {
-
         for (Equipo e : CreacionEquipos.getEquipos()) {
             if (e.getNombre().equalsIgnoreCase("Xtart")) {
                 equipoPlayer = e;
                 break;
             }
         }
-
     }
 
     public void setEquipoPlayer(Equipo equipoPlayer) {
@@ -68,10 +65,10 @@ public class Player {
             int i = 1;
             for (Clases.personas.Jugador j : equipoPlayer.getJugadores()) {
                 sb.append("  ").append(i).append(". ").append(j.getNombre().toUpperCase())
-                  .append(" | ").append(j.getPosicion())
-                  .append(" | ").append(j.getEdad()).append(" años")
-                  .append(" | ").append(j.getPrecio()).append("€")
-                  .append(" | Goles: ").append(j.getGolesAnotados()).append("\n");
+                    .append(" | ").append(j.getPosicion())
+                    .append(" | ").append(j.getEdad()).append(" años")
+                    .append(" | ").append(j.getPrecio()).append("€")
+                    .append(" | Goles: ").append(j.getGolesAnotados()).append("\n");
                 i++;
             }
         }

@@ -109,12 +109,20 @@ public class Equipo {
 
     public void setFalta(int falta) { this.falta = falta; }
 
+    public Entrenador getEntrenador() {
+        return entrenador;
+    }
+
+    public void setEntrenador(Entrenador entrenador) {
+        this.entrenador = entrenador;
+    }
+
     public void marcarGoles(int goles){
         Random rand = new Random();
         List<Jugador> jugadoresDeCampo = new ArrayList<>();
 
         for (Jugador jugador : jugadores) {
-            if (!jugador.getPosicion().toString().equals("PORTERO")) {
+            if (!jugador.getPosicion().toString().equals("PORTERO") || !jugador.isUltimaFalta()) {
                 jugadoresDeCampo.add(jugador);
             }
         }
@@ -182,19 +190,24 @@ public class Equipo {
     }
 
     public void hacerFalta(){
-        this.falta++;
         if (!jugadores.isEmpty()) {
             Random rand = new Random();
             int index = rand.nextInt(jugadores.size());
             Jugador jugadorFaltoso = jugadores.get(index);
-            System.out.println(Colores.NEGRITA+Colores.ROJO_BRILLANTE +jugadorFaltoso.getNombre() + " ha cometido una falta." + Colores.RESET);
-            if (falta >= 4) {
+            jugadorFaltoso.setFaltas(jugadorFaltoso.getFaltas() + 1);
+
+            if (jugadorFaltoso.getFaltas() >= 4) {
                 if (jugadorFaltoso.getPosicion() != Posiciones.PORTERO) {
-                    jugadorFaltoso.tarjetaAmarilla();
                     if (jugadorFaltoso.getAmarilla() == 2) {
                         jugadorFaltoso.tarjetaRoja();
                     }
+                    else{
+                        jugadorFaltoso.tarjetaAmarilla();
+                    }
                 }
+            }
+            else{
+                System.out.println(Colores.NEGRITA+Colores.ROJO_BRILLANTE +jugadorFaltoso.getNombre() + " ha cometido una falta." + Colores.RESET);
             }
         } else {
             System.out.println("Falta pitada, pero no hay jugadores en " + this.nombre);
@@ -212,27 +225,5 @@ public class Equipo {
         for(Jugador jugador : jugadores){
             System.out.println(jugador.getNombre() + " " + jugador.getPosicion());;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Equipo{" +
-                "nombre='" + nombre + '\'' +
-                ", jugadores=" + jugadores +
-                ", puntos=" + puntos +
-                ", golesFavor=" + golesFavor +
-                ", golesContra=" + golesContra +
-                ", estadio=" + estadio +
-                ", entrenador=" + entrenador +
-                ", puntosAtaque=" + puntosAtaque +
-                ", puntosDefensa=" + puntosDefensa +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Equipo equipo = (Equipo) o;
-        return Objects.equals(nombre, equipo.nombre) && Objects.equals(jugadores, equipo.jugadores) && Objects.equals(estadio, equipo.estadio) && Objects.equals(entrenador, equipo.entrenador);
     }
 }

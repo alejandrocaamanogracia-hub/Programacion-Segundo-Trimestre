@@ -9,6 +9,11 @@ public final class Entrenador extends Persona{
     }
 
     @Override
+    public void saludar() {
+        System.out.print("Buenas, soy el entrenador " + getNombre() + " y he entrenado al ");
+    }
+
+    @Override
     public String toString() {
         return "";
     }

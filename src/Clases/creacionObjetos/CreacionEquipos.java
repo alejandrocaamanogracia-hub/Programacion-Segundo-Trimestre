@@ -4,6 +4,7 @@ import Clases.equipos.Equipo;
 import Clases.equipos.Estadio;
 import Clases.personas.Entrenador;
 import Clases.personas.Jugador;
+import Clases.personas.Persona;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -78,7 +79,7 @@ public class CreacionEquipos {
                     }
                 }
 
-                List<Entrenador> entrenadores = CreacionPersonas.entrenadores;
+                List<Persona> entrenadores = CreacionPersonas.entrenadores;
 
                 Entrenador entrenadorEquipo = null;
                 for (int i = 0; i < entrenadores.size(); i++) {
@@ -94,7 +95,6 @@ public class CreacionEquipos {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public static void RellenarEquipos() {

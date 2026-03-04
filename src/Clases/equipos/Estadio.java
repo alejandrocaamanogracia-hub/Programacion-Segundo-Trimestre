@@ -34,14 +34,4 @@ public class Estadio {
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
     }
-
-    @Override
-    public String toString() {
-        return "Estadio{" +
-                "nombre='" + nombre + '\'' +
-                ", ubicacion='" + ubicacion + '\'' +
-                ", capacidad=" + capacidad +
-                '}';
-    }
-
 }

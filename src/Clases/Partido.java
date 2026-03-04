@@ -2,6 +2,8 @@ package Clases;
 
 import Clases.equipos.Equipo;
 import Clases.personas.Arbitro;
+import Clases.personas.Jugador;
+import Clases.personas.Persona;
 
 import java.awt.*;
 import java.util.Random;
@@ -68,8 +70,16 @@ public class Partido {
             System.out.println("\n");
             System.out.println("PARTIDO "+equipoLocal.getNombre()+" VS "+equipoVisitante.getNombre());
             System.out.println("UBICACIÓN: "+equipoLocal.getEstadio().getNombre());
-            Arbitro arbitro = asignarArbitro();
+
+            Persona arbitro = asignarArbitro();
             arbitro.saludar();
+
+            equipoLocal.getEntrenador().saludar();
+            System.out.println(equipoLocal.getNombre());
+
+            equipoVisitante.getEntrenador().saludar();
+            System.out.println(equipoVisitante.getNombre());
+
             System.out.println(Colores.NEGRITA+Colores.MORADO_BRILLANTE+"----------------------" + Colores.RESET);
             if(numGoles!=0) {
                 for (int i = 0; i < numGoles; i++) {
@@ -82,8 +92,8 @@ public class Partido {
                                 golesLocal++;
                                 this.equipoLocal.marcarGoles(1);
                                 this.equipoVisitante.recibirGoles();
-                                int numero = rand.nextInt(1,5);
-                                if(numero==4) {
+                                int numero = rand.nextInt(1,3);
+                                if(numero==2) {
                                     this.equipoVisitante.hacerFalta();
                                 }
                             } else {
@@ -94,8 +104,8 @@ public class Partido {
                             golesLocal++;
                             this.equipoLocal.marcarGoles(1);
                             this.equipoVisitante.recibirGoles();
-                            int numero = rand.nextInt(1,5);
-                            if(numero==4) {
+                            int numero = rand.nextInt(1,3);
+                            if(numero==2) {
                                 this.equipoVisitante.hacerFalta();
                             }
                         }
@@ -106,8 +116,8 @@ public class Partido {
                                 golesVisitante++;
                                 this.equipoVisitante.marcarGoles(1);
                                 this.equipoLocal.recibirGoles();
-                                int numero = rand.nextInt(1,5);
-                                if(numero==4) {
+                                int numero = rand.nextInt(1,3);
+                                if(numero==2) {
                                     this.equipoLocal.hacerFalta();
                                 }
                             } else {
@@ -118,19 +128,21 @@ public class Partido {
                             golesVisitante++;
                             this.equipoVisitante.marcarGoles(1);
                             this.equipoLocal.recibirGoles();
-                            int numero = rand.nextInt(1,5);
-                            if(numero==4) {
+                            int numero = rand.nextInt(1,3);
+                            if(numero==2) {
                                 this.equipoLocal.hacerFalta();
                             }
                         }
                     }
-                    //sleep();
                 }
             }
             getResultado();
             jugado = true;
             System.out.println(Colores.NEGRITA+Colores.MORADO_BRILLANTE+"----------------------" + Colores.RESET);
+
+
         }
+        quitarFaltas(equipoLocal, equipoVisitante);
     }
 
     public void getResultado(){
@@ -146,10 +158,17 @@ public class Partido {
         }
     }
 
-    public Arbitro asignarArbitro(){
+    public void quitarFaltas(Equipo equipoLocal, Equipo equipoVisitante){
+        for(Jugador jugador : equipoLocal.getJugadores()){
+            jugador.setUltimaFalta(false);
+        }
+        for(Jugador jugador : equipoVisitante.getJugadores()){
+            jugador.setUltimaFalta(false);
+        }
+    }
 
+    public Persona asignarArbitro(){
         Random r = new Random();
-
         int random =  r.nextInt(arbitros.size());
 
         return arbitros.get(random);
@@ -158,19 +177,13 @@ public class Partido {
 
     @Override
     public String toString() {
-
         String resultado;
 
         if (golesLocal > golesVisitante) {
-
             resultado = Colores.NEGRITA+Colores.VERDE_BRILLANTE+"Ganador: " + equipoLocal.getNombre() + "\n" + Colores.RESET;
-
         } else if (golesVisitante > golesLocal) {
-
             resultado = Colores.NEGRITA+Colores.VERDE_BRILLANTE+ "Ganador: " + equipoVisitante.getNombre() + "\n" + Colores.RESET;
-
         } else {
-
             resultado = Colores.NEGRITA + Colores.AMARILLO_BRILLANTE + "Empate\n" + Colores.RESET;
         }
 

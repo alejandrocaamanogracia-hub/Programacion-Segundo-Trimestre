@@ -42,8 +42,6 @@ public class Torneo {
         List<Equipo> lista = new ArrayList<>(equipos);
         java.util.Collections.shuffle(lista);
 
-        boolean esImpar = false;
-
         if (lista.size() % 2 != 0) {
             lista.add(new Equipo("Temporal"));
         }
@@ -54,26 +52,34 @@ public class Torneo {
 
         for (int jornada = 0; jornada < numJornadas; jornada++) {
             for (int i = 0; i < numEquipos / 2; i++) {
+                //El primero juega contra el último
                 Equipo local = lista.get(i);
                 Equipo visitante = lista.get(numEquipos - 1 - i);
 
+                //Evita que el primer equipo siempre este de local
                 if (jornada % 2 != 0 && i == 0) {
                     Equipo temp = local;
                     local = visitante;
                     visitante = temp;
                 }
-
+                //Se añaden a la lista si no juga contra temporal
                 if (!local.getNombre().equals("Temporal") && !visitante.getNombre().equals("Temporal")) {
                     partidos.add(new Partido(local, visitante));
                 }
             }
+            //Rota los equipos
+            //Elimina el último equipo
             Equipo ultimo = lista.remove(numEquipos - 1);
+            //Lo añade delante
             lista.add(1, ultimo);
         }
 
         int cantidadPartidosIda = partidos.size();
+        //Recorre los partidos ida
         for (int i = 0; i < cantidadPartidosIda; i++) {
+            //De cada partido de la ida
             Partido partidoIda = partidos.get(i);
+            //Pone al equipo visitante en el equipo local y viceversa
             partidos.add(new Partido(partidoIda.getEquipoVisitante(), partidoIda.getEquipoLocal()));
         }
     }
@@ -136,19 +142,34 @@ public class Torneo {
                         jornada = totalJornadas + 1;
                         break;
                     }else if (opcion.equals("3")) {
-                        List<Equipo> clasificacion = new ArrayList<>(torneo.getEquipos());
-                        clasificacion.sort((e1, e2) -> Integer.compare(e2.getPuntos(), e1.getPuntos()));
-                        System.out.println(Colores.VERDE+"--- CLASIFICACIÓN ----");
-                        int pos = 1;
-                        for (Equipo e : clasificacion) {
-                            System.out.println(pos + ". " + e.getNombre() + ": " + e.getPuntos() + " ptos");
-                            pos++;
+                        List<Equipo> provisional = new ArrayList<Equipo>();
+                        provisional.addAll(torneo.getEquipos());
+
+                        for (int i = 0; i < provisional.size() - 1; i++) {
+                            for (int j = 0; j < provisional.size() - 1 - i; j++) {
+                                if (provisional.get(j).getPuntos() < provisional.get(j + 1).getPuntos()) {
+                                    Equipo temporal = provisional.get(j);
+                                    provisional.set(j, provisional.get(j + 1));
+                                    provisional.set(j + 1, temporal);
+                                }
+                            }
                         }
+
+                        System.out.println(Colores.VERDE+"--- CLASIFICACIÓN ----"+Colores.RESET);
+
+                        int i = 1;
+                        for(Equipo equipo : provisional){
+                            System.out.println(i+". "+equipo.getNombre()+": "+equipo.getPuntos()+"ptos");
+                            i++;
+                        }
+
                         System.out.println();
                         System.out.println("JUGAR SIGUIENTE JORNADA");
                         System.out.println("Pulsa 1 ->");
                         System.out.println("Simular el resto de las jornadas");
                         System.out.println("Pulsa 2 ->");
+                        System.out.println("Ver clasificación");
+                        System.out.println("Pulsa 3 ->");
                     }
                     else if (opcion.equals("1")) {
                         break;
