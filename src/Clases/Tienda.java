@@ -133,7 +133,7 @@ public class Tienda {
                 } else {
                     System.out.println("--- TU PLANTILLA ---");
                     for (int i = 0; i < plantillaPlayer.size(); i++) {
-                        System.out.println((i + 1) + ". " + plantillaPlayer.get(i));
+                        System.out.println((i + 1) + "." + Colores.NEGRITA + plantillaPlayer.get(i).getNombre() + ". " + plantillaPlayer.get(i) + Colores.RESET);
                     }
                     System.out.println("0. Volver");
                     System.out.println("Elige un jugador para liberarlo (50% de su valor):");
